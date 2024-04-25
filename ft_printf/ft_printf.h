@@ -6,7 +6,7 @@
 /*   By: abdel-ma <abdel-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:17:11 by abdel-ma          #+#    #+#             */
-/*   Updated: 2024/04/23 19:01:07 by abdel-ma         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:44:56 by abdel-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <unistd.h>
 # include <strings.h>
 # include <stdint.h>
-#include <stdlib.h>
-
+# include <stdlib.h>
+# include <string.h>
 
 int		ft_printf(const char *format, ...);
 void	ft_char(char c, int *len);

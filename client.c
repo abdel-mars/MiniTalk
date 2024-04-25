@@ -6,83 +6,70 @@
 /*   By: abdel-ma <abdel-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:38:33 by abdel-ma          #+#    #+#             */
-/*   Updated: 2024/04/23 19:52:47 by abdel-ma         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:00:40 by abdel-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-// sends the binary message to the server
-// waits so the signals won't get ignored
-static void	ft_send_msg(int pid, char *s)
+static char *ft_str_to_bit(const char *str)
 {
-	size_t	i;
+    size_t len = strlen(str);
+    char *binary = (char *)calloc(len * 8 + 1, sizeof(char));
+    if (binary == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
 
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == '1')
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		i++;
-		usleep(80);
-	}
+    size_t i = 0;
+    size_t j = 0;
+    while (i < len)
+    {
+        unsigned char c = str[i];
+        int bit = 7;
+        while (bit >= 0)
+        {
+            binary[j++] = ((c >> bit) & 1) ? '1' : '0';
+            bit--;
+        }
+        i++;
+    }
+    return binary;
 }
 
-// converts the string to binary
-// starts from the end of the string with conversion
-// puts the binary number at the end of ret
-static char	*ft_to_bit(char *s, size_t i, size_t j)
+static void ft_message(int pid, const char *s)
 {
-	char	*ret;
-	int		c;
-	int		bytes;
-
-	i = ft_strlen(s);
-	ret = ft_calloc(i * 8 + 1, sizeof(char));
-	if (ret == NULL)
-		return (NULL);
-	while (i + 1 != 0)
-	{
-		c = s[i - 1];
-		bytes = 8;
-		while (bytes > 0)
-		{
-			if (c % 2 == 1)
-				ret[ft_strlen(s) * 8 - j - 1] = '1';
-			else
-				ret[ft_strlen(s) * 8 - j - 1] = '0';
-			c /= 2;
-			j++;
-			bytes--;
-		}
-		i--;
-	}
-	return (ret);
+    size_t i = 0;
+    while (s[i] != '\0')
+    {
+        if (s[i] == '1')
+            kill(pid, SIGUSR1);
+        else
+            kill(pid, SIGUSR2);
+        i++;
+        usleep(80);
+    }
 }
 
-// prints possible errors
-// takes the first argument and converts it to the server PID
-// coverts the string to binary
-// sends the binary chars to the server
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	int		pid;
-	char	*bits;
+    if (argc != 3)
+    {
+        fprintf(stderr, "Usage: %s <server_pid> <message>\n", argv[0]);
+        return 1;
+    }
 
-	if (argc != 3)
-	{
-		ft_printf("wrong number of arguments\n");
-		return (0);
-	}
-	pid = ft_atoi(argv[1]);
-	bits = ft_to_bit(argv[2], 0, 0);
-	if (bits == NULL)
-	{
-		ft_printf("allocation went wrong\n");
-		return (0);
-	}
-	ft_send_msg(pid, bits);
-	free(bits);
+    int pid = atoi(argv[1]);
+    if (pid <= 0)
+    {
+        fprintf(stderr, "Invalid PID\n");
+        return 1;
+    }
+
+    char *bits = ft_str_to_bit(argv[2]);
+    ft_message(pid, bits);
+
+    free(bits);
+    return 0;
 }
