@@ -5,10 +5,12 @@ all:
 
 clean:
 	@cd ft_printf && make clean
-	@rm -f server
-	@rm -f client
+	@rm -rf server
+	@rm -rf client
 
 fclean: clean
 	@cd ft_printf && make fclean
 
 re: fclean all
+
+.PHONY: all clean fclean re

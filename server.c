@@ -6,34 +6,27 @@
 /*   By: abdel-ma <abdel-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:38:28 by abdel-ma          #+#    #+#             */
-/*   Updated: 2024/04/25 19:02:30 by abdel-ma         ###   ########.fr       */
+/*   Updated: 2024/05/01 09:06:26 by abdel-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static void	convert_to_char(char *s)
+static void convert_to_char(char *bits)
 {
-	unsigned char c;
-	size_t	i;
-	
-	i = 0;
-	c = 0;
-	while (s[i])
-	{
-		c = c << 1;
-		
-		if (s[i] == '1')
-		c += 1;
-		i++;
-	}
-	write (1, &c, 1);
-
+    unsigned char c = 0;
+    for (int i = 0; i < 8; i++)
+    {
+        c = c << 1;
+        if (bits[i] == '1')
+            c += 1;
+    }
+    write(1, &c, 1);
 }
 
 static void ft_handle(int sig)
 {
-    static char bits[9] = {0}; // Initialize to zeros
+    static char bits[9] = {0}; 
     static int bitcount = 0;
 
     if (sig == SIGUSR1)
@@ -50,7 +43,7 @@ static void ft_handle(int sig)
 
 int main()
 {
-    printf("PID SERVER IS: %u\n", getpid());
+    printf("𝓟𝓘𝓓 : %u\n", getpid());
 
     signal(SIGUSR1, ft_handle);
     signal(SIGUSR2, ft_handle);
@@ -60,4 +53,5 @@ int main()
         pause();
     }
 
+    return 0;
 }

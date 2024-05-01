@@ -6,7 +6,7 @@
 /*   By: abdel-ma <abdel-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:28:44 by abdel-ma          #+#    #+#             */
-/*   Updated: 2024/04/25 19:01:38 by abdel-ma         ###   ########.fr       */
+/*   Updated: 2024/05/01 08:45:39 by abdel-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,6 @@ void	*ft_calloc(size_t count, size_t size)
 	ft_bzero(tmp, size * count);
 	return (tmp);
 }
-// void *ft_calloc(size_t count, size_t size)
-// {
-//     void *ptr = malloc(count * size);
-//     if (ptr != NULL)
-//         memset(ptr, 0, count * size);
-//     return ptr;
-// }
-
 
 int	ft_isspace(int c)
 {
