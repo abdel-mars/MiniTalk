@@ -6,7 +6,7 @@
 /*   By: abdel-ma <abdel-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:17:11 by abdel-ma          #+#    #+#             */
-/*   Updated: 2024/05/01 08:46:03 by abdel-ma         ###   ########.fr       */
+/*   Updated: 2024/05/04 06:56:12 by abdel-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	ft_ptr(unsigned long n, int *len);
 void	ft_printadress(unsigned long n, int *len);
 size_t	ft_strlen(const char *str);
 void	*ft_calloc(size_t count, size_t size);
-int     ft_atoi(const char *str);
-int     ft_isspace(int c);
-
+int		ft_atoi(const char *str);
+int		ft_isspace(int c);
 
 #endif
