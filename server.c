@@ -6,7 +6,7 @@
 /*   By: abdel-ma <abdel-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:38:28 by abdel-ma          #+#    #+#             */
-/*   Updated: 2024/05/04 06:41:33 by abdel-ma         ###   ########.fr       */
+/*   Updated: 2024/05/12 15:51:48 by abdel-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(void)
 	signal(SIGUSR2, ft_handle);
 	while (1)
 	{
-		usleep(100);
+		pause();
 	}
 	return (0);
 }
