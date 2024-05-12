@@ -6,7 +6,7 @@
 /*   By: abdel-ma <abdel-ma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:38:33 by abdel-ma          #+#    #+#             */
-/*   Updated: 2024/05/12 17:29:11 by abdel-ma         ###   ########.fr       */
+/*   Updated: 2024/05/12 17:49:26 by abdel-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	pid = ft_atoi(argv[1]);
-	if (pid <= 0 || kill(pid, 0) == -1)
+	if (pid <= 0)
 	{
 		ft_printf("𝙄𝙣𝙫𝙖𝙡𝙞𝙙 𝙋𝙄𝘿\n");
 		return (0);
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 	while (argv[2][i])
 	{
 		ft_message(pid, argv[2][i]);
-		usleep(455);
+		usleep(450);
 		i++;
 	}
 	ft_printf("Message sent successfully \n");
